@@ -32,7 +32,7 @@ if ($block->hasBestsellerProducts()) {
     </div>
 <?php endif; ?>
 
-<?php if ($block->hasBestsellerProducts()): ?>
+<?php if ($configuration->useCarousel()): ?>
 <script type="text/javascript">
     requirejs(['jquery','domReady!','owlcarousel'], function($){
         $("#best-sellers-carousel").owlCarousel({
