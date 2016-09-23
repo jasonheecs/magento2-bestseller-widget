@@ -1,0 +1,50 @@
+<li class="product-item">
+    <div class="product-item-info">
+        <a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl(); ?>" class="product-item-photo">
+            <?php echo $product->getImageHTML(); ?>
+        </a>
+        <div class="product-item-details">
+            <strong class="product-item-name">
+                <a title="<?php echo $this->escapeHtml($product->getName()); ?>"
+                   class="product-item-link"
+                   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+                    <?php echo $block->escapeHtml($product->getName()); ?>
+                </a>
+            </strong>
+            
+            <?php //TODO: refactor this ?>
+            <?php echo $block->getProductPriceHtml($product, 'widget-product-grid'); ?>
+            
+            <div class="product-item-actions">
+                <div class="actions-primary">
+                    <?php if ($product->isSaleable()): ?>
+                        <?php if ($product->hasRequiredOptions()): ?>
+                            <button class="action tocart primary"
+                                    data-mage-init='{"redirectUrl":{"url":"<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($product) ?>"}}'
+                                    type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
+                                <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                            </button>
+                        <?php else: ?>
+                            <button type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>"
+                                    class="action tocart primary"
+                                    data-post='<?php /* @escapeNotVerified */ echo $product->getCartPostData($this->helper('Magento\Framework\Data\Helper\PostHelper')); ?>'>
+                                <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                            </button>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php if ($product->getIsSalable()): ?>
+                            <div class="stock available" title="<?php /* @escapeNotVerified */ echo __('Availability') ?>">
+                                <span><?php /* @escapeNotVerified */ echo __('In stock') ?></span>
+                            </div>
+                        <?php else: ?>
+                            <div class="stock unavailable" title="<?php /* @escapeNotVerified */ echo __('Availability') ?>">
+                                <span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div> <!-- end actions-primary-->
+            </div> <!-- end product-item-actions-->
+
+        </div>
+    </div>
+</li>

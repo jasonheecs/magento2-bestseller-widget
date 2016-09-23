@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget id="jason_bestseller" class="Jason\Bestseller\Block\Widget\Bestseller" ttl="86400">
+		<label translate="true">Bestseller Product Widget</label>
+		<description translate="true">Bestseller Product Widget</description>
+		<parameters>
+			<parameter name="title" xsi:type="text" required="false" visible="true">
+			    <label translate="true">Title</label>
+			    <value>Bestsellers</value>
+			</parameter>
+			<parameter name="subtitle" xsi:type="text" required="false" visible="true">
+			    <label translate="true">Subtitle</label>
+			</parameter>
+			<parameter name="products_count" xsi:type="text" visible="true">
+				<label translate="true">Number of Products to Display</label>
+				<value>10</value>
+			</parameter>
+			<parameter name="dummy_products_ids" xsi:type="text" visible="true">
+				<label translate="true">Dummy Product Ids (separate ID values with comma)</label>
+				<description translate="true">Leave empty if you want to show actual bestselling products</description>
+			</parameter>
+			<parameter name="use_carousel" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Use Carousel</label>
+				<description translate="true">Show the products using a carousel</description>
+			</parameter>
+			<parameter name="template" xsi:type="select" visible="true" required="true" sort_order="10">
+			    <label translate="true">Template</label>
+			    <options>
+			        <option name="default" value="widget/bestsellerproducts.phtml" selected="true">
+			            <label translate="true">Bestseller Products Default Template</label>
+			        </option>
+			    </options>
+			</parameter>
+			<parameter name="cache_lifetime" xsi:type="text" visible="true">
+			    <label translate="true">Cache Lifetime (Seconds)</label>
+			    <description translate="true">86400 by default, if not set. To refresh instantly, clear the Blocks HTML Output cache.</description>
+			</parameter>
+		</parameters>
+	</widget>
+</widgets>
+ 

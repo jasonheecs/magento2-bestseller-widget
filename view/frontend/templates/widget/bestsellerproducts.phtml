@@ -1,0 +1,43 @@
+<?php
+if ($block->hasBestsellerProducts()) {
+    $products = $block->getProducts();
+    $mode = 'grid';
+    $configuration = $block->getConfiguration();
+    $title = $configuration->getTitle();
+    $subtitle = $configuration->getSubtitle();
+
+    // add owl carousel css file
+    if ($configuration->useCarousel()) {
+        include($block->getTemplateFile('Jason_Bestseller::widget/owl.carousel.css.phtml'));
+    }
+}
+?>
+
+<?php if ($block->hasBestsellerProducts()): ?>
+    <div class="content-heading">
+        <h2 class="title"><?php echo $title; ?></h2>
+        <p class="info"><?php echo $subtitle; ?></p>
+    </div>
+    <div class="widget block block-bestseller-products <?php /* @escapeNotVerified */ echo $mode; ?>">
+        <div class="block-content">
+            <!-- Best Seller products content widget -->
+            <div class="products-<?php /* @escapeNotVerified */ echo $mode; ?> <?php /* @escapeNotVerified */ echo $mode; ?>">
+                <ol id="best-sellers-carousel" class="product-items widget-product-grid widget-bestseller-grid">
+                    <?php foreach ($products as $product): ?>
+                        <?php include($block->getTemplateFile('Jason_Bestseller::widget/bestsellerproduct.phtml')) ?>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($block->hasBestsellerProducts()): ?>
+<script type="text/javascript">
+    requirejs(['jquery','domReady!','owlcarousel'], function($){
+        $("#best-sellers-carousel").owlCarousel({
+            items: 4
+        });
+    }); 
+</script>
+<?php endif; ?>
